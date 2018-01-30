@@ -1,0 +1,35 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="owc-core-starter-kit">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+  <script>
+    /**
+     * `owc-core-starter-kit`
+     * This component is the core part of the OWC Starter Kit, useful to start from scratch a new web application based on OWC 2.0. &lt;br&gt; This component includes the following OWC core elements:&lt;br&gt; &lt;ul&gt;&lt;li&gt;the navigation element, useful to display the elements in the OWC application&lt;/li&gt;&lt;li&gt;the main menu element, containing the basic elements useful to configure application main theme and settings&lt;/li&gt;&lt;/ul&gt;&lt;br&gt;
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class OwcCoreStarterKit extends Polymer.Element {
+      static get is() { return 'owc-core-starter-kit'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'owc-core-starter-kit'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(OwcCoreStarterKit.is, OwcCoreStarterKit);
+  </script>
+</dom-module>
