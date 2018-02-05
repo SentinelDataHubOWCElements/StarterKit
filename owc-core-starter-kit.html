@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../owc-core-window-manager/owc-core-window-manager.html">
 
 <dom-module id="owc-core-starter-kit">
   <template>
@@ -7,12 +8,15 @@
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <owc-core-window-manager></owc-core-window-manager>
   </template>
   <script>
     /**
      * `owc-core-starter-kit`
-     * This component is the core part of the OWC Starter Kit, useful to start from scratch a new web application based on OWC 2.0. &lt;br&gt; This component includes the following OWC core elements:&lt;br&gt; &lt;ul&gt;&lt;li&gt;the navigation element, useful to display the elements in the OWC application&lt;/li&gt;&lt;li&gt;the main menu element, containing the basic elements useful to configure application main theme and settings&lt;/li&gt;&lt;/ul&gt;&lt;br&gt;
+     * This component is the core part of the OWC Starter Kit, useful to start from scratch a new web application based on OWC 2.0. 
+     This component includes the following OWC core elements:
+     - the navigation element, useful to display the elements in the OWC application&lt;
+     - the main menu element, containing the basic elements useful to configure application main theme and settings.
      *
      * @customElement
      * @polymer
