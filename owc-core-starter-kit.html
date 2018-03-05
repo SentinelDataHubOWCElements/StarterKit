@@ -1,4 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../owc-core-http-manager/owc-core-http-manager.html">
+<link rel="import" href="../owc-core-utils/owc-core-utils.html">
 <link rel="import" href="../owc-core-window-manager/owc-core-window-manager.html">
 
 <dom-module id="owc-core-starter-kit">
@@ -8,7 +10,7 @@
         display: block;
       }
     </style>
-    <owc-core-window-manager></owc-core-window-manager>
+    <owc-core-window-manager id="window-manager"></owc-core-window-manager>
   </template>
   <script>
     /**
@@ -26,12 +28,34 @@
       static get is() { return 'owc-core-starter-kit'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'owc-core-starter-kit'
+          ctx: {
+            type: Object,
+            value: {}
           }
         };
       }
+
+      constructor() {
+        super();
+        this.init();
+      }
+
+      init() {
+        this.windowManager = document.getElementById('window-manager');
+        this.ctx = this.windowManager.ctx;
+        console.log("this.ctx",this.ctx);
+        console.log("this.windowManager",this.windowManager);
+        this.utils = new OwcCoreUtils();
+        this.utils.ctx = this;
+        console.log("this.utils",this.utils);
+        this.httpManager = new OwcCoreHttpManager();
+        this.httpManager.ctx = this;
+        
+        this.httpManager.filter = new OwcCoreHttpFilter();
+        console.log("this.httpManager",this.httpManager);
+      }
+
+
     }
 
     window.customElements.define(OwcCoreStarterKit.is, OwcCoreStarterKit);
