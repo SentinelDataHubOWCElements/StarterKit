@@ -27,6 +27,14 @@
      */
     class OwcCoreStarterKit extends Polymer.Element {
       static get is() { return 'owc-core-starter-kit'; }
+      static get properties() {
+        return {
+          ctx: {
+            type: Object,
+            value: {}
+          }
+        };
+      }
 
       constructor() {
         super();
@@ -35,6 +43,7 @@
       connectedCallback() {
 
 
+        this.init();
 
         super.connectedCallback();
         var dummy = document.createElement('hello-owc');
@@ -51,6 +60,7 @@
 
         this.wm.pushComponent(dummy,"150px", "Test Title" );
 
+
       }
 
       disconnectedCallback() {
@@ -58,13 +68,20 @@
 
       }
 
-      static get properties() {
-        return {
-          ctx: {
-            type: Object,
-            value: {}
-          }
-        };
+      init() {
+        /*this.windowManager = this.shadowRoot.querySelector("#window-manager");
+        this.ctx = this.windowManager.ctx;
+        console.log("this.ctx",this.ctx);
+        console.log("this.windowManager",this.windowManager);*/
+        this.utils = new OwcCoreUtils();
+        this.utils.ctx = this;
+        console.log("this.utils",this.utils);
+        this.httpManager = new OwcCoreHttpManager();
+        this.httpManager.ctx = this;
+        
+        //this.httpManager.filter = new OwcCoreHttpFilter();
+        console.log("this.httpManager",this.httpManager);
+        this.httpManager.sendRequest("GET","http://192.168.10.83:8081/api/stub/countries");
       }
 
     }
