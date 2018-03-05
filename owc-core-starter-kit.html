@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<!-- <link rel="import" href="../owc-core-http-manager/owc-core-http-manager.html"> -->
-<!-- <link rel="import" href="../owc-core-utils/owc-core-utils.html"> -->
+<link rel="import" href="../owc-core-http-manager/owc-core-http-manager.html"> 
+<link rel="import" href="../owc-core-utils/owc-core-utils.html"> 
 <link rel="import" href="../owc-core-window-manager/owc-core-window-manager.html">
 <link rel="import" href="../owc-hello/hello-owc.html">
 
@@ -52,12 +52,6 @@
         this.ctx.wm =  this.wm;
         dummy.ctx = this.ctx;
 
-        //this.utils = new OwcCoreUtils();
-        //this.utils.ctx = this;
-        //this.httpManager = new OwcCoreHttpManager();
-        //this.httpManager.ctx = this;
-        //this.httpManager.filter = new OwcCoreHttpFilter();
-
         this.wm.pushComponent(dummy,"150px", "Test Title" );
 
 
@@ -69,19 +63,15 @@
       }
 
       init() {
-        /*this.windowManager = this.shadowRoot.querySelector("#window-manager");
-        this.ctx = this.windowManager.ctx;
-        console.log("this.ctx",this.ctx);
-        console.log("this.windowManager",this.windowManager);*/
+        /* Create owc-core-utils component*/
         this.utils = new OwcCoreUtils();
-        this.utils.ctx = this;
-        console.log("this.utils",this.utils);
+        this.utils.setContext(this);
+        /* Create owc-core-http-manager component*/
         this.httpManager = new OwcCoreHttpManager();
-        this.httpManager.ctx = this;
+        this.httpManager.setContext(this);
+        this.httpManager.filter.setContext(this);
         
-        //this.httpManager.filter = new OwcCoreHttpFilter();
-        console.log("this.httpManager",this.httpManager);
-        this.httpManager.sendRequest("GET","http://192.168.10.83:8081/api/stub/countries");
+        //this.httpManager.sendRequest("GET","http://192.168.10.83:8081/api/stub/countries");
       }
 
     }
