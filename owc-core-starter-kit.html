@@ -1,7 +1,8 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../owc-core-http-manager/owc-core-http-manager.html">
-<link rel="import" href="../owc-core-utils/owc-core-utils.html">
+<!-- <link rel="import" href="../owc-core-http-manager/owc-core-http-manager.html"> -->
+<!-- <link rel="import" href="../owc-core-utils/owc-core-utils.html"> -->
 <link rel="import" href="../owc-core-window-manager/owc-core-window-manager.html">
+<link rel="import" href="../owc-hello/hello-owc.html">
 
 <dom-module id="owc-core-starter-kit">
   <template>
@@ -10,12 +11,12 @@
         display: block;
       }
     </style>
-    <owc-core-window-manager id="window-manager"></owc-core-window-manager>
+    <owc-core-window-manager id="wmtest"></owc-core-window-manager>
   </template>
   <script>
     /**
      * `owc-core-starter-kit`
-     * This component is the core part of the OWC Starter Kit, useful to start from scratch a new web application based on OWC 2.0. 
+     * This component is the core part of the OWC Starter Kit, useful to start from scratch a new web application based on OWC 2.0.
      This component includes the following OWC core elements:
      - the navigation element, useful to display the elements in the OWC application&lt;
      - the main menu element, containing the basic elements useful to configure application main theme and settings.
@@ -26,6 +27,37 @@
      */
     class OwcCoreStarterKit extends Polymer.Element {
       static get is() { return 'owc-core-starter-kit'; }
+
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+
+
+
+        super.connectedCallback();
+        var dummy = document.createElement('hello-owc');
+        this.wm = this.shadowRoot.querySelector('#wmtest');
+        this.wm.ctx = this.ctx;
+        this.ctx.wm =  this.wm;
+        dummy.ctx = this.ctx;
+
+        //this.utils = new OwcCoreUtils();
+        //this.utils.ctx = this;
+        //this.httpManager = new OwcCoreHttpManager();
+        //this.httpManager.ctx = this;
+        //this.httpManager.filter = new OwcCoreHttpFilter();
+
+        this.wm.pushComponent(dummy,"150px", "Test Title" );
+
+      }
+
+      disconnectedCallback() {
+        super.disconnectedCallback();
+
+      }
+
       static get properties() {
         return {
           ctx: {
@@ -34,27 +66,6 @@
           }
         };
       }
-
-      constructor() {
-        super();
-        this.init();
-      }
-
-      init() {
-        this.windowManager = document.getElementById('window-manager');
-        this.ctx = this.windowManager.ctx;
-        console.log("this.ctx",this.ctx);
-        console.log("this.windowManager",this.windowManager);
-        this.utils = new OwcCoreUtils();
-        this.utils.ctx = this;
-        console.log("this.utils",this.utils);
-        this.httpManager = new OwcCoreHttpManager();
-        this.httpManager.ctx = this;
-        
-        this.httpManager.filter = new OwcCoreHttpFilter();
-        console.log("this.httpManager",this.httpManager);
-      }
-
 
     }
 
