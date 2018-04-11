@@ -1,6 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../owc-core-http-manager/owc-core-http-manager.html"> 
-<link rel="import" href="../owc-core-utils/owc-core-utils.html"> 
+<link rel="import" href="../owc-core-http-manager/owc-core-http-manager.html">
+<link rel="import" href="../owc-core-utils/owc-core-utils.html">
 <link rel="import" href="../owc-core-window-manager/owc-core-window-manager.html">
 <link rel="import" href="../owc-hello/hello-owc.html">
 
@@ -48,11 +48,11 @@
         super.connectedCallback();
         var dummy = document.createElement('hello-owc');
         this.wm = this.shadowRoot.querySelector('#wmtest');
-        this.wm.ctx = this.ctx;
+        this.wm._ctx = this.ctx;
         this.ctx.wm =  this.wm;
-        dummy.ctx = this.ctx;
 
-        this.wm.pushComponent(dummy,"150px", "Test Title" );
+
+        this.wm.pushComponent(dummy);
 
 
       }
@@ -70,7 +70,7 @@
         this.httpManager = new OwcCoreHttpManager();
         this.httpManager.setContext(this);
         this.httpManager.filter.setContext(this);
-        
+
         //this.httpManager.sendRequest("GET","http://192.168.10.83:8081/api/stub/countries");
       }
 

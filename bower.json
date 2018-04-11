@@ -6,7 +6,8 @@
     "polymer": "Polymer/polymer#^2.0.0",
     "owc-core-window-manager":"SentinelDataHubOWCElements/owc-core-window-manager#master",
     "owc-core-http-manager":"SentinelDataHubOWCElements/owc-core-http-manager#master",
-    "owc-core-utils":"SentinelDataHubOWCElements/owc-core-utils#master"
+    "owc-core-utils":"SentinelDataHubOWCElements/owc-core-utils#master",
+    "owc-hello":"SentinelDataHubOWCElements/owc-hello#master"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
