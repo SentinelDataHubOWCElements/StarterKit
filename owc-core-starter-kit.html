@@ -3,15 +3,38 @@
 <link rel="import" href="../owc-core-utils/owc-core-utils.html">
 <link rel="import" href="../owc-core-window-manager/owc-core-window-manager.html">
 <link rel="import" href="../owc-hello/hello-owc.html">
+<link rel="import" href="../owc-core-main-menu/owc-core-main-menu.html">
 
 <dom-module id="owc-core-starter-kit">
   <template>
     <style>
       :host {
         display: block;
+        font-family: 'Roboto',  'Open Sans', sans-serif !important;
       }
+
+      #wmtest{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        margin: 0px;
+        position: 0px;
+      }
+
+
+      .windows-manager-container{
+        height: 100%;
+        width: calc(100% - 200px);
+        position:fixed;
+        left: 200px;
+      }
+
     </style>
-    <owc-core-window-manager id="wmtest"></owc-core-window-manager>
+    <owc-core-main-menu>
+    </owc-core-main-menu>
+    <div class="windows-manager-container">
+      <owc-core-window-manager id="wmtest"></owc-core-window-manager>
+    </div>
   </template>
   <script>
     /**
@@ -41,20 +64,17 @@
       }
 
       connectedCallback() {
-
-
         this.init();
 
         super.connectedCallback();
         var dummy = document.createElement('hello-owc');
+        var dummy2 = document.createElement('hello-owc');
         this.wm = this.shadowRoot.querySelector('#wmtest');
         this.wm._ctx = this.ctx;
         this.ctx.wm =  this.wm;
 
-
-        this.wm.pushComponent(dummy);
-
-
+        this.ctx.wm.pushComponent(dummy);
+        this.ctx.wm.pushComponent(dummy2);
       }
 
       disconnectedCallback() {
