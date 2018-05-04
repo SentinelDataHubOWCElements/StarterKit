@@ -9,6 +9,7 @@
     "owc-core-utils":"SentinelDataHubOWCElements/owc-core-utils#master",
     "owc-hello":"SentinelDataHubOWCElements/owc-hello#master",
     "owc-core-message-broker":"SentinelDataHubOWCElements/owc-core-message-broker#master"
+    "owc-core-main-menu":"SentinelDataHubOWCElements/owc-core-main-menu#master"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
