@@ -30,8 +30,9 @@
       }
 
     </style>
-    <owc-core-main-menu>
+    <owc-core-main-menu id="main-menu">
     </owc-core-main-menu>
+    <owc-core-http-manager id="hm"></owc-core-http-manager>
     <div class="windows-manager-container">
       <owc-core-window-manager id="wmtest"></owc-core-window-manager>
     </div>
@@ -52,7 +53,7 @@
       static get is() { return 'owc-core-starter-kit'; }
       static get properties() {
         return {
-          ctx: {
+          _ctx: {
             type: Object,
             value: {}
           }
@@ -64,35 +65,40 @@
       }
 
       connectedCallback() {
-        this.init();
+
 
         super.connectedCallback();
-        var dummy = document.createElement('hello-owc');
-        var dummy2 = document.createElement('hello-owc');
+        // var dummy = document.createElement('hello-owc');
+        // var dummy2 = document.createElement('hello-owc');
         this.wm = this.shadowRoot.querySelector('#wmtest');
-        this.wm._ctx = this.ctx;
-        this.ctx.wm =  this.wm;
+        this.wm._ctx = this._ctx;
+        this._ctx.wm =  this.wm;
 
-        this.ctx.wm.pushComponent(dummy);
-        this.ctx.wm.pushComponent(dummy2);
+        this.mainmenu = this.shadowRoot.querySelector('#main-menu');
+        this.mainmenu._ctx = this._ctx;
+
+        // this._ctx.wm.pushComponent(dummy);
+        this.hm  = this.shadowRoot.querySelector('#hm');
+        this.hm._ctx = this._ctx;
+      //this.ctx.wm.pushComponent(dummy2);
       }
 
       disconnectedCallback() {
         super.disconnectedCallback();
 
       }
-
-      init() {
-        /* Create owc-core-utils component*/
-        this.utils = new OwcCoreUtils();
-        this.utils.setContext(this);
-        /* Create owc-core-http-manager component*/
-        this.httpManager = new OwcCoreHttpManager();
-        this.httpManager.setContext(this);
-        this.httpManager.filter.setContext(this);
-
-        //this.httpManager.sendRequest("GET","http://192.168.10.83:8081/api/stub/countries");
-      }
+      //
+      // init() {
+      //   /* Create owc-core-utils component*/
+      //   this.utils = new OwcCoreUtils();
+      //   this.utils.setContext(this);
+      //   /* Create owc-core-http-manager component*/
+      //   this.httpManager = new OwcCoreHttpManager();
+      //   this.httpManager.setContext(this);
+      //   this.httpManager.filter.setContext(this);
+      //
+      //   //this.httpManager.sendRequest("GET","http://192.168.10.83:8081/api/stub/countries");
+      // }
 
     }
 
