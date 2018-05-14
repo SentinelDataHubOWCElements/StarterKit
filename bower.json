@@ -4,12 +4,11 @@
   "main": "owc-core-starter-kit.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "owc-core-window-manager":"SentinelDataHubOWCElements/owc-core-window-manager#master",
-    "owc-core-http-manager":"SentinelDataHubOWCElements/owc-core-http-manager#master",
-    "owc-core-utils":"SentinelDataHubOWCElements/owc-core-utils#master",
-    "owc-hello":"SentinelDataHubOWCElements/owc-hello#master",
-    "owc-core-message-broker":"SentinelDataHubOWCElements/owc-core-message-broker#master"
-    "owc-core-main-menu":"SentinelDataHubOWCElements/owc-core-main-menu#master"
+    "owc-core-window-manager":"SentinelDataHubOWCElements/owc-core-window-manager#0.0.1",
+    "owc-core-http-manager":"SentinelDataHubOWCElements/owc-core-http-manager#0.0.1",
+    "owc-core-utils":"SentinelDataHubOWCElements/owc-core-utils#0.0.1",
+    "owc-hello":"SentinelDataHubOWCElements/owc-hello#0.0.2",
+    "owc-core-main-menu":"SentinelDataHubOWCElements/owc-core-main-menu#0.0.1"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
