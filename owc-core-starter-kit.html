@@ -1,0 +1,107 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../owc-core-http-manager/owc-core-http-manager.html">
+<link rel="import" href="../owc-core-utils/owc-core-utils.html">
+<link rel="import" href="../owc-core-window-manager/owc-core-window-manager.html">
+<link rel="import" href="../owc-hello/hello-owc.html">
+<link rel="import" href="../owc-core-main-menu/owc-core-main-menu.html">
+
+<dom-module id="owc-core-starter-kit">
+  <template>
+    <style>
+      :host {
+        display: block;
+        font-family: 'Roboto',  'Open Sans', sans-serif !important;
+      }
+
+      #wmtest{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        margin: 0px;
+        position: 0px;
+      }
+
+
+      .windows-manager-container{
+        height: 100%;
+        width: calc(100% - 200px);
+        position:fixed;
+        left: 200px;
+      }
+
+    </style>
+    <owc-core-main-menu id="main-menu">
+    </owc-core-main-menu>
+    <owc-core-http-manager id="hm"></owc-core-http-manager>
+    <div class="windows-manager-container">
+      <owc-core-window-manager id="wmtest"></owc-core-window-manager>
+    </div>
+  </template>
+  <script>
+    /**
+     * `owc-core-starter-kit`
+     * This component is the core part of the OWC Starter Kit, useful to start from scratch a new web application based on OWC 2.0.
+     This component includes the following OWC core elements:
+     - the navigation element, useful to display the elements in the OWC application&lt;
+     - the main menu element, containing the basic elements useful to configure application main theme and settings.
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class OwcCoreStarterKit extends Polymer.Element {
+      static get is() { return 'owc-core-starter-kit'; }
+      static get properties() {
+        return {
+          _ctx: {
+            type: Object,
+            value: {}
+          }
+        };
+      }
+
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+
+
+        super.connectedCallback();
+        // var dummy = document.createElement('hello-owc');
+        // var dummy2 = document.createElement('hello-owc');
+        this.wm = this.shadowRoot.querySelector('#wmtest');
+        this.wm._ctx = this._ctx;
+        this._ctx.wm =  this.wm;
+
+        this.mainmenu = this.shadowRoot.querySelector('#main-menu');
+        this.mainmenu._ctx = this._ctx;
+
+        // this._ctx.wm.pushComponent(dummy);
+        this.hm  = this.shadowRoot.querySelector('#hm');
+        this.hm._ctx = this._ctx;
+      //this.ctx.wm.pushComponent(dummy2);
+      }
+
+      disconnectedCallback() {
+        super.disconnectedCallback();
+
+      }
+      //
+      // init() {
+      //   /* Create owc-core-utils component*/
+      //   this.utils = new OwcCoreUtils();
+      //   this.utils.setContext(this);
+      //   /* Create owc-core-http-manager component*/
+      //   this.httpManager = new OwcCoreHttpManager();
+      //   this.httpManager.setContext(this);
+      //   this.httpManager.filter.setContext(this);
+      //
+      //   //this.httpManager.sendRequest("GET","http://192.168.10.83:8081/api/stub/countries");
+      // }
+
+    }
+
+    window.customElements.define(OwcCoreStarterKit.is, OwcCoreStarterKit);
+  </script>
+</dom-module>

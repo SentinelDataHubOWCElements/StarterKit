@@ -1,0 +1,21 @@
+{
+  "name": "owc-core-starter-kit",
+  "description": "This component is the core part of the OWC Starter Kit, useful to start from scratch a new web application based on OWC 2.0. &lt;br&gt; This component includes the following OWC core elements:&lt;br&gt; &lt;ul&gt;&lt;li&gt;the navigation element, useful to display the elements in the OWC application&lt;/li&gt;&lt;li&gt;the main menu element, containing the basic elements useful to configure application main theme and settings&lt;/li&gt;&lt;/ul&gt;&lt;br&gt;",
+  "main": "owc-core-starter-kit.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "owc-core-window-manager":"SentinelDataHubOWCElements/owc-core-window-manager#master",
+    "owc-core-http-manager":"SentinelDataHubOWCElements/owc-core-http-manager#master",
+    "owc-core-utils":"SentinelDataHubOWCElements/owc-core-utils#master",
+    "owc-hello":"SentinelDataHubOWCElements/owc-hello#master",
+    "owc-core-main-menu":"SentinelDataHubOWCElements/owc-core-main-menu#master"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  }
+}
