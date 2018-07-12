@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer-element.html">
+
 <link rel="import" href="../owc-core-http-manager/owc-core-http-manager.html">
 <link rel="import" href="../owc-core-utils/owc-core-utils.html">
 <link rel="import" href="../owc-core-window-manager/owc-core-window-manager.html">
@@ -6,40 +7,19 @@
 <link rel="import" href="../owc-core-main-menu/owc-core-main-menu.html">
 <!--owc-core-message-broker migration-->
 <link rel="import" href="../owc-core-message-broker/owc-core-message-broker.html">
-<link rel="import" href="../owc-core-message-broker/demo/owc-core-message-broker-demo-1.html">
-<link rel="import" href="../owc-core-message-broker/demo/owc-core-message-broker-demo-2.html">
-<link rel="import" href="../owc-core-message-broker/demo/owc-core-message-broker-demo-3.html">
-
-<link rel="import" href="../owc-hello/hello-owc.html">
-<link rel="import" href="../owc-hello-2/owc-hello-2.html">
-<link rel="import" href="../owc-hello-2/demo/owc-core-login-demo-1.html">
-
-<!--owc-core-authentication migration-->
 <link rel="import" href="../owc-core-authentication-manager/owc-core-authentication-manager.html">
-
-<!--owc-core-authentication-manager demo-->
 <link rel="import" href="../owc-core-authentication-manager/demo/owc-core-authentication-manager-demo-1.html">
-
-<!-- owc-ui-login-box migration -->
-<link rel="import" href="../owc-ui-login-box/owc-ui-login-box.html">
-
-<!-- owc ui list -->
-<link rel="import" href="../owc-ui-list/owc-ui-list.html">
-
-<!-- row item -->
-<link rel="import" href="../owc-ui-row-item/owc-ui-row-item.html">
-
-<!-- i18n manager -->
 <link rel="import" href="../owc-core-i18n/owc-core-i18n.html">
+
 <dom-module id="owc-core-starter-kit">
   <template>
     <style>
       :host {
         display: block;
-        font-family: 'Roboto',  'Open Sans', sans-serif !important;
+        font-family: 'Roboto', 'Open Sans', sans-serif !important;
       }
 
-      #wmtest{
+      #wm {
         width: 100%;
         height: 100%;
         position: absolute;
@@ -48,35 +28,32 @@
       }
 
 
-      .windows-manager-container{
+      .windows-manager-container {
         height: 100%;
         width: calc(100% - 200px);
-        position:fixed;
+        position: fixed;
         left: 200px;
       }
-
     </style>
-        <!--Migration services ID-Assignment-->
-        <owc-core-window-manager id="wmtest"></owc-core-window-manager>
-        <owc-core-message-broker id="mb"></owc-core-message-broker>
-        <owc-core-authentication-manager id="am"></owc-core-authentication-manager>
-        <owc-core-http-manager id="httpm"></owc-core-http-manager>
-        <owc-core-http-filter id="hfilter"></owc-core-http-filter>
-        <owc-core-utils id="utils"></owc-core-utils>
-        <owc-core-i18n id="i18n"></owc-core-i18n>
-    
-        <!-- <owc-ui-login-box id="lb"></owc-ui-login-box> -->
-        <!-- <owc-hello id="hello-owc"></owc-hello> -->
-        <!-- <owc-ui-list id=listAdapter></owc-ui-list> -->
-        <!-- <owc-ui-row-item ></owc-ui-row-item>> -->
+
+    <!--Migration services ID-Assignment-->
+    <owc-core-message-broker id="mb"></owc-core-message-broker>
+    <owc-core-authentication-manager id="am"></owc-core-authentication-manager>
+    <owc-core-http-manager id="httpm"></owc-core-http-manager>
+    <owc-core-http-filter id="hfilter"></owc-core-http-filter>
+    <owc-core-utils id="utils"></owc-core-utils>
+    <owc-core-i18n id="i18n"></owc-core-i18n>
+
     <owc-core-main-menu id="main-menu">
     </owc-core-main-menu>
     <owc-core-http-manager id="hm"></owc-core-http-manager>
+    
     <div class="windows-manager-container">
-      <owc-core-window-manager id="wmtest"></owc-core-window-manager>
+      <owc-core-window-manager id="wm"></owc-core-window-manager>
     </div>
   </template>
   <script>
+    
     /**
      * `owc-core-starter-kit`
      * This component is the core part of the OWC Starter Kit, useful to start from scratch a new web application based on OWC 2.0.
@@ -88,82 +65,7 @@
      * @polymer
      * @demo demo/index.html
      */
-     class OwcCoreI18nx{
-        
 
-        constructor() {
-          super();
-          // this.currentLanguage = "en";
-          this.dictionaries = {};
-          HTMLElement.prototype.i18n = function (termToTranslate) {
-            return this._ctx.i18n.translate(termToTranslate, this._ctx.i18n.currentLanguage);
-          }
-
-          this.ready();
-        }
-
-        ready() {          
-          var json = {
-            "username": {
-              "it": "nome utente"
-            },
-            "Welcome": {
-              "en": "Hello",
-              "it": "Benvenuto",
-              "es": "Bienvenida"
-            },
-            "wrongLogin": {
-              "en": "The user name and password you entered did not match.",
-              "it": "Il nome utente e la password che hai inserito non corrispondono.",
-              "es": "El nombre de usuario y la contraseña que ingresó no coinciden. "
-            }
-          }
-          this.append(json);
-
-        }
-
-        /**
-        *   Append a json object to all dictionaries specified in json data
-        *
-        * @param jsonData: example to append to dictionaries
-        * key: keyTerm value 
-        */
-        append(jsonData) {
-          console.log("-- append")
-          var self = this;
-          Object.keys(jsonData).forEach(function (key) {
-            Object.keys(jsonData[key]).forEach(function (language) {
-              self.appendTerm(language, key, jsonData[key][language]); //Append the single term
-            });
-          });
-        }
-
-        /**
-        *   Append a single term in json format to a given dictionary
-        *
-        * @param language: language to append json to. if language is not present ill be created a new one
-        * @param keyTerm : key value. 
-        * @param val : value
-        */
-        appendTerm(language, keyTerm, val) {
-          if (this.dictionaries[language] == undefined) this.dictionaries[language] = {}; //If dictionary doesnt exists, create it      
-          this.dictionaries[language][keyTerm] = val; //Append new term 
-        }
-
-        /**
-        *  Returns the corresponding translations if it finds one, otherwise returns the input value, using currentLanguage of i18n Component
-        *
-        * @param {?Object} newValue: the new value of public Property
-        * @return {String} if a translation is present for the current language return the proper translations, otherwise returns
-        */
-        translate(keyTerm, language) {
-          console.log("translate(" + keyTerm + ")");
-          if (this.dictionaries[language] == undefined) return keyTerm; //if looking for a non existing language, still returns the value
-          return this.dictionaries[language][keyTerm] == undefined ? keyTerm : this.dictionaries[language][keyTerm];
-        }
-      }
-
-     ///// ----/ /////
 
 
     class OwcCoreStarterKit extends Polymer.Element {
@@ -180,49 +82,25 @@
       constructor() {
         super();
         this._ctx = {};
-
-this.i18n = new OwcCoreI18nx();
-this.i18n._ctx = this._ctx;
-this._ctx.i18n = this.i18n;
       }
 
       connectedCallback() {
-
-
         super.connectedCallback();
-        // var dummy = document.createElement('hello-owc');
-        // var dummy2 = document.createElement('hello-owc');
-        this.wm = this.shadowRoot.querySelector('#wmtest');
+        this.wm = this.shadowRoot.querySelector('#wm');
         this.wm._ctx = this._ctx;
-        this._ctx.wm =  this.wm;
+        this._ctx.wm = this.wm;
 
         this.mainmenu = this.shadowRoot.querySelector('#main-menu');
         this.mainmenu._ctx = this._ctx;
 
-        // this._ctx.wm.pushComponent(dummy);
-        this.hm  = this.shadowRoot.querySelector('#hm');
+        this.hm = this.shadowRoot.querySelector('#hm');
         this.hm._ctx = this._ctx;
-      //this.ctx.wm.pushComponent(dummy2);
-      
       }
 
       disconnectedCallback() {
         super.disconnectedCallback();
 
       }
-      //
-      // init() {
-      //   /* Create owc-core-utils component*/
-      //   this.utils = new OwcCoreUtils();
-      //   this.utils.setContext(this);
-      //   /* Create owc-core-http-manager component*/
-      //   this.httpManager = new OwcCoreHttpManager();
-      //   this.httpManager.setContext(this);
-      //   this.httpManager.filter.setContext(this);
-      //
-      //   //this.httpManager.sendRequest("GET","http://192.168.10.83:8081/api/stub/countries");
-      // }
-
     }
 
     window.customElements.define(OwcCoreStarterKit.is, OwcCoreStarterKit);
