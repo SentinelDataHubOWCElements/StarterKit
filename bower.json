@@ -8,7 +8,12 @@
     "owc-core-http-manager":"SentinelDataHubOWCElements/owc-core-http-manager#master",
     "owc-core-utils":"SentinelDataHubOWCElements/owc-core-utils#master",
     "owc-hello":"SentinelDataHubOWCElements/owc-hello#master",
-    "owc-core-main-menu":"SentinelDataHubOWCElements/owc-core-main-menu#master"
+    "owc-core-main-menu":"SentinelDataHubOWCElements/owc-core-main-menu#master",
+
+    "owc-ui-login-box": "SentinelDataHubOWCElements/owc-ui-login-box#feature-sd-2925-login-box-migration",
+    "owc-core-authentication-manager" : "SentinelDataHubOWCElements/owc-core-authentication-manager#feature-sd-2511-authentication-authorization-component-migration",
+    "owc-core-i18n":"SentinelDataHubOWCElements/owc-core-i18n#feature-sd-2919-i18n-manager-migration",
+    "owc-core-message-broker" : "SentinelDataHubOWCElements/owc-core-message-broker#0.0.2"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
