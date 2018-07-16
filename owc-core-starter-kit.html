@@ -1,19 +1,25 @@
 <link rel="import" href="../polymer/polymer-element.html">
+
 <link rel="import" href="../owc-core-http-manager/owc-core-http-manager.html">
 <link rel="import" href="../owc-core-utils/owc-core-utils.html">
 <link rel="import" href="../owc-core-window-manager/owc-core-window-manager.html">
 <link rel="import" href="../owc-hello/hello-owc.html">
 <link rel="import" href="../owc-core-main-menu/owc-core-main-menu.html">
+<!--owc-core-message-broker migration-->
+<link rel="import" href="../owc-core-message-broker/owc-core-message-broker.html">
+<link rel="import" href="../owc-core-authentication-manager/owc-core-authentication-manager.html">
+<link rel="import" href="../owc-core-authentication-manager/demo/owc-core-authentication-manager-demo-1.html">
+<link rel="import" href="../owc-core-i18n/owc-core-i18n.html">
 
 <dom-module id="owc-core-starter-kit">
   <template>
     <style>
       :host {
         display: block;
-        font-family: 'Roboto',  'Open Sans', sans-serif !important;
+        font-family: 'Roboto', 'Open Sans', sans-serif !important;
       }
 
-      #wmtest{
+      #wm {
         width: 100%;
         height: 100%;
         position: absolute;
@@ -22,22 +28,32 @@
       }
 
 
-      .windows-manager-container{
+      .windows-manager-container {
         height: 100%;
         width: calc(100% - 200px);
-        position:fixed;
+        position: fixed;
         left: 200px;
       }
-
     </style>
+
+    <!--Migration services ID-Assignment-->
+    <owc-core-message-broker id="mb"></owc-core-message-broker>
+    <owc-core-authentication-manager id="am"></owc-core-authentication-manager>
+    <owc-core-http-manager id="hm"></owc-core-http-manager>
+    <owc-core-http-filter id="hfilter"></owc-core-http-filter>
+    <owc-core-utils id="utils"></owc-core-utils>
+    <owc-core-i18n id="i18n"></owc-core-i18n>
+
     <owc-core-main-menu id="main-menu">
     </owc-core-main-menu>
     <owc-core-http-manager id="hm"></owc-core-http-manager>
+    
     <div class="windows-manager-container">
-      <owc-core-window-manager id="wmtest"></owc-core-window-manager>
+      <owc-core-window-manager id="wm"></owc-core-window-manager>
     </div>
   </template>
   <script>
+    
     /**
      * `owc-core-starter-kit`
      * This component is the core part of the OWC Starter Kit, useful to start from scratch a new web application based on OWC 2.0.
@@ -49,6 +65,9 @@
      * @polymer
      * @demo demo/index.html
      */
+
+
+
     class OwcCoreStarterKit extends Polymer.Element {
       static get is() { return 'owc-core-starter-kit'; }
       static get properties() {
@@ -62,44 +81,40 @@
 
       constructor() {
         super();
+        this._ctx = {};
       }
 
       connectedCallback() {
-
-
         super.connectedCallback();
-        // var dummy = document.createElement('hello-owc');
-        // var dummy2 = document.createElement('hello-owc');
-        this.wm = this.shadowRoot.querySelector('#wmtest');
+        this.wm = this.shadowRoot.querySelector('#wm');
         this.wm._ctx = this._ctx;
-        this._ctx.wm =  this.wm;
+        this._ctx.wm = this.wm;
 
         this.mainmenu = this.shadowRoot.querySelector('#main-menu');
         this.mainmenu._ctx = this._ctx;
 
-        // this._ctx.wm.pushComponent(dummy);
-        this.hm  = this.shadowRoot.querySelector('#hm');
+        this.hm = this.shadowRoot.querySelector('#hm');
         this.hm._ctx = this._ctx;
-      //this.ctx.wm.pushComponent(dummy2);
+ 
+	      this._ctx.hm = this.hm;	
+      
+        this._ctx.i18n = this.shadowRoot.querySelector('#i18n');
+        this._ctx.am = this.shadowRoot.querySelector('#am');
+        this._ctx.am._ctx = this._ctx;
+
+	      this.utils = this.shadowRoot.querySelector("#utils");
+	      this._ctx.utils = this.utils;
+        this.utils._ctx = this._ctx;
+
+        this.mb = this.shadowRoot.querySelector("#mb");
+        this._ctx.mb = this.mb;
+        this.mb._ctx = this._ctx;
       }
 
       disconnectedCallback() {
         super.disconnectedCallback();
 
       }
-      //
-      // init() {
-      //   /* Create owc-core-utils component*/
-      //   this.utils = new OwcCoreUtils();
-      //   this.utils.setContext(this);
-      //   /* Create owc-core-http-manager component*/
-      //   this.httpManager = new OwcCoreHttpManager();
-      //   this.httpManager.setContext(this);
-      //   this.httpManager.filter.setContext(this);
-      //
-      //   //this.httpManager.sendRequest("GET","http://192.168.10.83:8081/api/stub/countries");
-      // }
-
     }
 
     window.customElements.define(OwcCoreStarterKit.is, OwcCoreStarterKit);
