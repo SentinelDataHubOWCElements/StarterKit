@@ -95,6 +95,20 @@
 
         this.hm = this.shadowRoot.querySelector('#hm');
         this.hm._ctx = this._ctx;
+ 
+	this._ctx.hm = this.hm;	
+      
+        this._ctx.i18n = this.shadowRoot.querySelector('#i18n');
+        this._ctx.am = this.shadowRoot.querySelector('#am');
+        this._ctx.am._ctx = this._ctx;
+
+	this.utils = this.shadowRoot.querySelector("#utils");
+	this._ctx.utils = this.utils;
+        this.utils._ctx = this._ctx;
+
+        this.mb = this.shadowRoot.querySelector("#mb");
+        this._ctx.mb = this.mb;
+        this.mb._ctx = this._ctx;
       }
 
       disconnectedCallback() {
