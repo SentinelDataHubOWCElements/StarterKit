@@ -14,6 +14,8 @@
     "owc-core-authentication-manager" : "SentinelDataHubOWCElements/owc-core-authentication-manager#0.0.3",
     "owc-core-i18n":"SentinelDataHubOWCElements/owc-core-i18n#0.0.1",
     "owc-core-message-broker" : "SentinelDataHubOWCElements/owc-core-message-broker#0.0.2"
+    "owc-ui-list":"SentinelDataHubOWCElements/owc-ui-list#master"
+
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",

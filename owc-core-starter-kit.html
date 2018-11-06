@@ -1,15 +1,14 @@
 <link rel="import" href="../polymer/polymer-element.html">
-
+<link rel="import" href="../owc-core-window-manager/owc-core-window-manager.html">
 <link rel="import" href="../owc-core-http-manager/owc-core-http-manager.html">
 <link rel="import" href="../owc-core-utils/owc-core-utils.html">
-<link rel="import" href="../owc-core-window-manager/owc-core-window-manager.html">
 <link rel="import" href="../owc-hello/hello-owc.html">
 <link rel="import" href="../owc-core-main-menu/owc-core-main-menu.html">
-<!--owc-core-message-broker migration-->
 <link rel="import" href="../owc-core-message-broker/owc-core-message-broker.html">
 <link rel="import" href="../owc-core-authentication-manager/owc-core-authentication-manager.html">
 <link rel="import" href="../owc-core-authentication-manager/demo/owc-core-authentication-manager-demo-1.html">
 <link rel="import" href="../owc-core-i18n/owc-core-i18n.html">
+<link rel="import" href="../owc-core-liquid-model-datasource/owc-core-liquid-model-datasource.html">
 
 <dom-module id="owc-core-starter-kit">
   <template>
@@ -20,15 +19,6 @@
       }
 
       #wm {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        margin: 0px;
-        position: 0px;
-      }
-
-
-      .windows-manager-container {
         height: 100%;
         width: calc(100% - 200px);
         position: fixed;
@@ -36,38 +26,57 @@
       }
     </style>
 
-    <!--Migration services ID-Assignment-->
-    <owc-core-message-broker id="mb"></owc-core-message-broker>
-    <owc-core-authentication-manager id="am"></owc-core-authentication-manager>
-    <owc-core-http-manager id="hm"></owc-core-http-manager>
-    <owc-core-http-filter id="hfilter"></owc-core-http-filter>
-    <owc-core-utils id="utils"></owc-core-utils>
-    <owc-core-i18n id="i18n"></owc-core-i18n>
-
-    <owc-core-main-menu id="main-menu">
-    </owc-core-main-menu>
-    <owc-core-http-manager id="hm"></owc-core-http-manager>
+    <!-- Default Application layout -->
+    <owc-core-main-menu id="main-menu"></owc-core-main-menu>
     
-    <div class="windows-manager-container">
-      <owc-core-window-manager id="wm"></owc-core-window-manager>
-    </div>
+    <!--Services ID-Assignment-->
+    <owc-core-window-manager id="wm"></owc-core-window-manager>
+    <owc-core-http-manager id="hm"></owc-core-http-manager>
+    <owc-core-authentication-manager id="am"></owc-core-authentication-manager>
+    <owc-core-message-broker id="mb"></owc-core-message-broker>
+    <owc-core-utils id="utils"></owc-core-utils>
+    <owc-core-liquid-model-datasource id="ds"></owc-core-liquid-model-datasource>
+    <owc-core-i18n id="i18n"></owc-core-i18n>
   </template>
   <script>
-    
+
+    //Singleton in Javascript
+    var ApplicationContext = (function () {
+
+      // Instance stores a reference to the Singleton
+      var instance;
+      function init() {
+        // Private methods and variables
+        function privateMethod() {
+          console.log("I am private");
+        }
+        var privateVariable = "Im also private";
+        return {
+          publicMethod: function () { // Public methods and variables
+            console.log("The public can see me!");
+          },
+          context: "I am also public" //Global accessible variable
+        };
+      };
+
+      return {
+        // Get the Singleton instance if one exists, or create one if it doesn't
+        getInstance: function () {
+          if (!instance) {
+            instance = init();
+          }
+          return instance;
+        }
+      };
+    })();
+
     /**
      * `owc-core-starter-kit`
      * This component is the core part of the OWC Starter Kit, useful to start from scratch a new web application based on OWC 2.0.
      This component includes the following OWC core elements:
      - the navigation element, useful to display the elements in the OWC application&lt;
      - the main menu element, containing the basic elements useful to configure application main theme and settings.
-     *
-     * @customElement
-     * @polymer
-     * @demo demo/index.html
      */
-
-
-
     class OwcCoreStarterKit extends Polymer.Element {
       static get is() { return 'owc-core-starter-kit'; }
       static get properties() {
@@ -81,39 +90,33 @@
 
       constructor() {
         super();
-        this._ctx = {};
+        ApplicationContext.getInstance().context = this._ctx; // Assign _ctx to Singleton
       }
 
       connectedCallback() {
         super.connectedCallback();
+        
+        //Application Menu
+        this.mainmenu = this.shadowRoot.querySelector('#main-menu'); //Main Menu
+        
+        
+        // @Service Window Manager
         this.wm = this.shadowRoot.querySelector('#wm');
         this.wm._ctx = this._ctx;
         this._ctx.wm = this.wm;
 
-        this.mainmenu = this.shadowRoot.querySelector('#main-menu');
-        this.mainmenu._ctx = this._ctx;
 
-        this.hm = this.shadowRoot.querySelector('#hm');
-        this.hm._ctx = this._ctx;
- 
-	      this._ctx.hm = this.hm;	
-      
+
+        // @Services. Can be called with self._ctx.xxx.serviceMethod
+        // this.mainmenu._ctx = this._ctx;
+        
+        this._ctx.hm = this.shadowRoot.querySelector('#hm'); //Http Manager
+        this._ctx.am = this.shadowRoot.querySelector('#am'); //Authentication Manager
+        this._ctx.mb = this.shadowRoot.querySelector("#mb"); //Message Broker
+        this._ctx.utils = this.shadowRoot.querySelector("#utils"); //Utils
+        this._ctx.ds = this.shadowRoot.querySelector("#ds"); //Utils
+
         this._ctx.i18n = this.shadowRoot.querySelector('#i18n');
-        this._ctx.am = this.shadowRoot.querySelector('#am');
-        this._ctx.am._ctx = this._ctx;
-
-	      this.utils = this.shadowRoot.querySelector("#utils");
-	      this._ctx.utils = this.utils;
-        this.utils._ctx = this._ctx;
-
-        this.mb = this.shadowRoot.querySelector("#mb");
-        this._ctx.mb = this.mb;
-        this.mb._ctx = this._ctx;
-      }
-
-      disconnectedCallback() {
-        super.disconnectedCallback();
-
       }
     }
 
