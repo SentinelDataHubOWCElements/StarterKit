@@ -13,7 +13,7 @@
     "owc-ui-login-box": "SentinelDataHubOWCElements/owc-ui-login-box#0.0.2",
     "owc-core-authentication-manager" : "SentinelDataHubOWCElements/owc-core-authentication-manager#0.0.4",
     "owc-core-i18n":"SentinelDataHubOWCElements/owc-core-i18n#0.0.2",
-    "owc-core-message-broker" : "SentinelDataHubOWCElements/owc-core-message-broker#0.0.2"
+    "owc-core-message-broker" : "SentinelDataHubOWCElements/owc-core-message-broker#0.0.2",
     "owc-ui-list":"SentinelDataHubOWCElements/owc-ui-list#0.0.1"
 
   },
