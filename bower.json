@@ -4,17 +4,17 @@
   "main": "owc-core-starter-kit.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "owc-core-window-manager":"SentinelDataHubOWCElements/owc-core-window-manager#0.0.3",
-    "owc-core-http-manager":"SentinelDataHubOWCElements/owc-core-http-manager#0.0.3",
-    "owc-core-utils":"SentinelDataHubOWCElements/owc-core-utils#0.0.2",
+    "owc-core-window-manager":"SentinelDataHubOWCElements/owc-core-window-manager#0.0.4",
+    "owc-core-http-manager":"SentinelDataHubOWCElements/owc-core-http-manager#0.0.4",
+    "owc-core-utils":"SentinelDataHubOWCElements/owc-core-utils#0.0.3",
     "owc-hello":"SentinelDataHubOWCElements/owc-hello#master",
-    "owc-core-main-menu":"SentinelDataHubOWCElements/owc-core-main-menu#0.0.3",
+    "owc-core-main-menu":"SentinelDataHubOWCElements/owc-core-main-menu#0.0.4",
 
-    "owc-ui-login-box": "SentinelDataHubOWCElements/owc-ui-login-box#0.0.1",
-    "owc-core-authentication-manager" : "SentinelDataHubOWCElements/owc-core-authentication-manager#0.0.3",
-    "owc-core-i18n":"SentinelDataHubOWCElements/owc-core-i18n#0.0.1",
+    "owc-ui-login-box": "SentinelDataHubOWCElements/owc-ui-login-box#0.0.2",
+    "owc-core-authentication-manager" : "SentinelDataHubOWCElements/owc-core-authentication-manager#0.0.4",
+    "owc-core-i18n":"SentinelDataHubOWCElements/owc-core-i18n#0.0.2",
     "owc-core-message-broker" : "SentinelDataHubOWCElements/owc-core-message-broker#0.0.2"
-    "owc-ui-list":"SentinelDataHubOWCElements/owc-ui-list#master"
+    "owc-ui-list":"SentinelDataHubOWCElements/owc-ui-list#0.0.1"
 
   },
   "devDependencies": {
